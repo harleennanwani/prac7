@@ -1,15 +1,12 @@
-# hello_world.py
+import os
+import sys
 
-# Print a greeting message
-print("Hello, World!")
+# Check if a name is passed as a command-line argument or environment variable for CI environments
+if len(sys.argv) > 1:
+    name = sys.argv[1]  # Use the name from command-line argument
+elif os.environ.get('JENKINS_URL'):
+    name = 'Jenkins User'  # Default value for Jenkins environment
+else:
+    name = input("What is your name? ")  # Interactive mode for local use
 
-# Ask the user for their name
-name = input("What is your name? ")
-
-# Print a personalized greeting
-print(f"Nice to meet you, {name}!")
-
-# Perform a simple calculation
-number = int(input("Enter a number to double it: "))
-doubled = number * 2
-print(f"The double of {number} is {doubled}.")
+print(f"Hello, {name}!")
